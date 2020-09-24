@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugins nextID="17">
+  <plugin id="0" name="HelpCommand" version="1.0.0" />
+  <plugin id="1" name="PluginController" version="1.0.0" />
+  <plugin id="2" name="Sniffer" version="1.0.0" />
+  <plugin id="3" name="DemoCommand" version="1.0.0" />
+  <plugin id="4" name="MessageCommand" version="1.0.0" />
+  <plugin id="5" name="MockCommand" version="1.0.0" />
+  <plugin id="6" name="DebugCommand" version="1.0.0" />
+  <plugin id="7" name="ClientCommand" version="1.0.0" />
+  <plugin id="8" name="ClearCommand" version="1.0.0" />
+  <plugin id="9" name="ObjectCacheMonitor" version="1.0.0" />
+  <plugin id="10" name="HttpHealthCheck" version="1.0.0" />
+  <plugin id="11" name="AgarPlayerManager" version="1.0.0" />
+  <plugin id="12" name="BlockDemoPlayerManager" version="1.0.0" />
+  <plugin id="13" name="BlockDemoWorldManager" version="1.0.0" />
+  <plugin id="14" name="NetworkTestManager" version="1.0.0" />
+  <plugin id="15" name="NT_Game_Manager" version="1.0.0" />
+  <plugin id="16" name="NT_Login_Manager" version="1.0.0" />
+</plugins>

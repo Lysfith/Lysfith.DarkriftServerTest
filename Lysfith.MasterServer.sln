@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29926.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lysfith.MasterServer.Models", "Lysfith.MasterServer.Models\Lysfith.MasterServer.Models.csproj", "{C51AF366-C180-4B09-B24E-A53DD7C73C6C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lysfith.MasterServer.Plugins", "Lysfith.MasterServer.Plugins\Lysfith.MasterServer.Plugins.csproj", "{D34190A7-360E-41AC-AE1E-03DC9237BA81}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C51AF366-C180-4B09-B24E-A53DD7C73C6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C51AF366-C180-4B09-B24E-A53DD7C73C6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C51AF366-C180-4B09-B24E-A53DD7C73C6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C51AF366-C180-4B09-B24E-A53DD7C73C6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D34190A7-360E-41AC-AE1E-03DC9237BA81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D34190A7-360E-41AC-AE1E-03DC9237BA81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D34190A7-360E-41AC-AE1E-03DC9237BA81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D34190A7-360E-41AC-AE1E-03DC9237BA81}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4E74BD4E-ED5F-4736-A8DD-848226BCD643}
+	EndGlobalSection
+EndGlobal

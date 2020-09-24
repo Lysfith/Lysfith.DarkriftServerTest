@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Lysfith.MasterServer.Models\Lysfith.MasterServer.Models.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="DarkRift">
+      <HintPath>..\Libs\DarkRift Server (.NET Framework)\Lib\DarkRift.dll</HintPath>
+    </Reference>
+    <Reference Include="DarkRift.Server">
+      <HintPath>..\Libs\DarkRift Server (.NET Framework)\Lib\DarkRift.Server.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
