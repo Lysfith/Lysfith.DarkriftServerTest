@@ -8,6 +8,9 @@
     <Reference Include="DarkRift">
       <HintPath>..\Libs\DarkRift Server (.NET Framework)\Lib\DarkRift.dll</HintPath>
     </Reference>
+    <Reference Include="DarkRift.Client">
+      <HintPath>..\..\..\C#\Lysfith.MasterServer\Libs\DarkRift Server (.NET Framework)\Lib\DarkRift.Client.dll</HintPath>
+    </Reference>
     <Reference Include="DarkRift.Server">
       <HintPath>..\Libs\DarkRift Server (.NET Framework)\Lib\DarkRift.Server.dll</HintPath>
     </Reference>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<plugins nextID="17">
+<plugins nextID="18">
   <plugin id="0" name="HelpCommand" version="1.0.0" />
   <plugin id="1" name="PluginController" version="1.0.0" />
   <plugin id="2" name="Sniffer" version="1.0.0" />
@@ -17,4 +17,5 @@
   <plugin id="14" name="NetworkTestManager" version="1.0.0" />
   <plugin id="15" name="NT_Game_Manager" version="1.0.0" />
   <plugin id="16" name="NT_Login_Manager" version="1.0.0" />
+  <plugin id="17" name="RoomManager" version="1.0.0" />
 </plugins>

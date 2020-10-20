@@ -19,11 +19,23 @@ namespace Lysfith.MasterServer.Plugins
 
         public RoomManager(PluginLoadData pluginLoadData) : base(pluginLoadData)
         {
+            ClientManager.ClientConnected += ClientManager_ClientConnected;
+            ClientManager.ClientDisconnected += ClientManager_ClientDisconnected;
+        }
 
+        private void ClientManager_ClientDisconnected(object sender, ClientDisconnectedEventArgs e)
+        {
+            Console.WriteLine($"ClientManager_ClientDisconnected");
+        }
+
+        void ClientManager_ClientConnected(object sender, ClientConnectedEventArgs e)
+        {
+            e.Client.MessageReceived += Client_MessageReceived;
         }
 
         private void Client_MessageReceived(object sender, MessageReceivedEventArgs e)
         {
+            Console.WriteLine($"MessageReceived: {e.Tag}");
             switch (e.Tag)
             {
                 case NetworkTags.C_CreateRoom:
@@ -45,11 +57,13 @@ namespace Lysfith.MasterServer.Plugins
         {
             if (_rooms.ContainsKey(e.Client.ID))
             {
-                var roomResultAlreadyCreated = new CreateRoomResult(false, string.Empty, "Room already created");
+                var r = _rooms[e.Client.ID];
+                var roomResultAlreadyCreated = new CreateRoomResult(false, r.Code, "Room already created");
                 using (var message = NetworkMessage.CreateMessage(roomResultAlreadyCreated))
                 {
                     e.Client.SendMessage(message, SendMode.Reliable);
                 }
+                return;
             }
 
             var key = Room.GenerateKey(_roomKeys);
@@ -73,6 +87,7 @@ namespace Lysfith.MasterServer.Plugins
                 {
                     e.Client.SendMessage(message, SendMode.Reliable);
                 }
+                return;
             }
 
             var roomToDestroy = _rooms[e.Client.ID];
@@ -97,7 +112,7 @@ namespace Lysfith.MasterServer.Plugins
 
         private void JoinRoomEvent(MessageReceivedEventArgs e)
         {
-            var joinRoomMessage = JoinRoom.ReadMessage<JoinRoom>(e);
+            var joinRoomMessage = JoinRoom.ReadMessageServer<JoinRoom>(e);
 
             var room = _rooms.Values.Where(r => r.Code == joinRoomMessage.Code.ToUpperInvariant()).FirstOrDefault();
 
@@ -108,6 +123,7 @@ namespace Lysfith.MasterServer.Plugins
                 {
                     e.Client.SendMessage(message, SendMode.Reliable);
                 }
+                return;
             }
 
             var result = room.AddPlayer(e.Client.ID);
@@ -148,6 +164,7 @@ namespace Lysfith.MasterServer.Plugins
                 {
                     e.Client.SendMessage(message, SendMode.Reliable);
                 }
+                return;
             }
 
             var result = room.RemovePlayer(e.Client.ID);

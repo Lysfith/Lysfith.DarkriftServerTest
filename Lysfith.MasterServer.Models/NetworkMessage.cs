@@ -1,5 +1,4 @@
 ﻿using DarkRift;
-using DarkRift.Server;
 using System;
 
 namespace Lysfith.MasterServer.Models
@@ -28,7 +27,16 @@ namespace Lysfith.MasterServer.Models
 
         }
 
-        public static T ReadMessage<T>(MessageReceivedEventArgs e) where T : NetworkMessage, new()
+        public static T ReadMessageServer<T>(DarkRift.Server.MessageReceivedEventArgs e) where T : NetworkMessage, new()
+        {
+            using (var message = e.GetMessage())
+            using (var reader = message.GetReader())
+            {
+                return reader.ReadSerializable<T>();
+            }
+        }
+
+        public static T ReadMessageClient<T>(DarkRift.Client.MessageReceivedEventArgs e) where T : NetworkMessage, new()
         {
             using (var message = e.GetMessage())
             using (var reader = message.GetReader())

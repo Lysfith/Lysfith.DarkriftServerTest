@@ -2,3 +2,4 @@
 obj
 bin
 *.user
+/Libs/DarkRift Server (.NET Framework)/Logs
