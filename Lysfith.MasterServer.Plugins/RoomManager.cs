@@ -50,6 +50,12 @@ namespace Lysfith.MasterServer.Plugins
                 case NetworkTags.C_QuitRoom:
                     QuitRoomEvent(e);
                     break;
+                case NetworkTags.C_OpenRoom:
+                    OpenRoomEvent(e);
+                    break;
+                case NetworkTags.C_CloseRoom:
+                    CloseRoomEvent(e);
+                    break;
             }
         }
 
@@ -66,8 +72,10 @@ namespace Lysfith.MasterServer.Plugins
                 return;
             }
 
+            var createRoomMessage = CreateRoom.ReadMessageServer<CreateRoom>(e);
+
             var key = Room.GenerateKey(_roomKeys);
-            var room = new Room(key, e.Client.ID);
+            var room = new Room(key, e.Client.ID, createRoomMessage.LocalIp, createRoomMessage.LocalPort, createRoomMessage.WanIp, createRoomMessage.WanPort);
             _rooms.Add(e.Client.ID, room);
 
             //Notify response
@@ -118,7 +126,7 @@ namespace Lysfith.MasterServer.Plugins
 
             if (room == null)
             {
-                var roomResultNotFound = new JoinRoomResult(false, "Room not found");
+                var roomResultNotFound = new JoinRoomError(e.Client.ID, "Room not found");
                 using (var message = NetworkMessage.CreateMessage(roomResultNotFound))
                 {
                     e.Client.SendMessage(message, SendMode.Reliable);
@@ -126,13 +134,12 @@ namespace Lysfith.MasterServer.Plugins
                 return;
             }
 
-            var result = room.AddPlayer(e.Client.ID);
+            var result = room.CanAddPlayer(e.Client.ID);
 
             //Notify response
-            JoinRoomResult roomResult = null;
-            if (!result)
+            if (result != null)
             {
-                roomResult = new JoinRoomResult(false, "Room full");
+                var roomResult = new JoinRoomError(e.Client.ID, result);
                 using (var message = NetworkMessage.CreateMessage(roomResult))
                 {
                     e.Client.SendMessage(message, SendMode.Reliable);
@@ -140,11 +147,13 @@ namespace Lysfith.MasterServer.Plugins
             }
             else
             {
-                roomResult = new JoinRoomResult(true, string.Empty);
+                room.AddPlayer(e.Client.ID);
+
+                var roomResult = new JoinRoomSuccess(e.Client.ID, room.LocalIp, room.LocalPort, room.WanIp, room.WanPort);
 
                 using (var message = NetworkMessage.CreateMessage(roomResult))
                 {
-                    ClientManager.GetClient(room.Host).SendMessage(message, SendMode.Reliable);
+                    ClientManager.GetClient(room.HostId).SendMessage(message, SendMode.Reliable);
                     foreach (var p in room.Players)
                     {
                         ClientManager.GetClient(p).SendMessage(message, SendMode.Reliable);
@@ -185,13 +194,45 @@ namespace Lysfith.MasterServer.Plugins
 
                 using (var message = NetworkMessage.CreateMessage(roomResult))
                 {
-                    ClientManager.GetClient(room.Host).SendMessage(message, SendMode.Reliable);
+                    ClientManager.GetClient(room.HostId).SendMessage(message, SendMode.Reliable);
                     foreach (var p in room.Players)
                     {
                         ClientManager.GetClient(p).SendMessage(message, SendMode.Reliable);
                     }
                 }
             }
+        }
+
+        private void OpenRoomEvent(MessageReceivedEventArgs e)
+        {
+            if (!_rooms.ContainsKey(e.Client.ID))
+            {
+                var roomResultNotFound = new DestroyRoomResult(false, "Room not found");
+                using (var message = NetworkMessage.CreateMessage(roomResultNotFound))
+                {
+                    e.Client.SendMessage(message, SendMode.Reliable);
+                }
+                return;
+            }
+
+            var room = _rooms[e.Client.ID];
+            room.Open();
+        }
+
+        private void CloseRoomEvent(MessageReceivedEventArgs e)
+        {
+            if (!_rooms.ContainsKey(e.Client.ID))
+            {
+                var roomResultNotFound = new DestroyRoomResult(false, "Room not found");
+                using (var message = NetworkMessage.CreateMessage(roomResultNotFound))
+                {
+                    e.Client.SendMessage(message, SendMode.Reliable);
+                }
+                return;
+            }
+
+            var room = _rooms[e.Client.ID];
+            room.Close();
         }
     }
 }

@@ -4,33 +4,33 @@ using System;
 
 namespace Lysfith.MasterServer.Models
 {
-    public class JoinRoomResult : NetworkMessage
+    public class JoinRoomError : NetworkMessage
     {
-        public bool Result { get; set; }
+        public ushort PlayerId { get; set; }
         public string Message { get; set; }
 
-        public JoinRoomResult()
-            :base(NetworkTags.S_JoinRoomResult)
+        public JoinRoomError()
+            :base(NetworkTags.S_JoinRoomError)
         {
 
         }
 
-        public JoinRoomResult(bool result, string message)
-            : base(NetworkTags.S_JoinRoomResult)
+        public JoinRoomError(ushort playerId, string message)
+            : base(NetworkTags.S_JoinRoomError)
         {
-            Result = result;
             Message = message;
+            PlayerId = playerId;
         }
 
         public override void Deserialize(DeserializeEvent e)
         {
-            Result = e.Reader.ReadBoolean();
+            PlayerId = e.Reader.ReadUInt16();
             Message = e.Reader.ReadString();
         }
 
         public override void Serialize(SerializeEvent e)
         {
-            e.Writer.Write(Result);
+            e.Writer.Write(PlayerId);
             e.Writer.Write(Message);
         }
     }

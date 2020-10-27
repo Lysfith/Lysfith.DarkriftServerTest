@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "DarkRift.Server.Console": {
+      "commandName": "Executable",
+      "executablePath": "G:\\Git\\Lysfith.MasterServer\\Libs\\DarkRift Server (.NET Framework)\\DarkRift.Server.Console.exe",
+      "workingDirectory": "G:\\Git\\Lysfith.MasterServer\\Libs\\DarkRift Server (.NET Framework)"
+    }
+  }
+}
