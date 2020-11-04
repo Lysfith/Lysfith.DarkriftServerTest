@@ -149,7 +149,7 @@ namespace Lysfith.MasterServer.Plugins
             {
                 room.AddPlayer(e.Client.ID);
 
-                var roomResult = new JoinRoomSuccess(e.Client.ID, room.LocalIp, room.LocalPort, room.WanIp, room.WanPort);
+                var roomResult = new JoinRoomSuccess(e.Client.ID, room.Code, room.LocalIp, room.LocalPort, room.WanIp, room.WanPort);
 
                 using (var message = NetworkMessage.CreateMessage(roomResult))
                 {

@@ -57,7 +57,7 @@ namespace Lysfith.MasterServer.Plugins.Models
 
             if (_players.Contains(playerId))
             {
-                return "Player already in room";
+                return "Already in room";
             };
             return null;
         }
