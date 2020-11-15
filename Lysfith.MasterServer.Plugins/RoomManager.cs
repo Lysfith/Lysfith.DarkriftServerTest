@@ -26,6 +26,23 @@ namespace Lysfith.MasterServer.Plugins
         private void ClientManager_ClientDisconnected(object sender, ClientDisconnectedEventArgs e)
         {
             Console.WriteLine($"ClientManager_ClientDisconnected");
+
+            if (_rooms.ContainsKey(e.Client.ID))
+            {
+                var roomToDestroy = _rooms[e.Client.ID];
+                _rooms.Remove(e.Client.ID);
+
+                var players = roomToDestroy.Players.Where(p => p != e.Client.ID).ToList();
+
+                //Notify response
+                using (Message playerMessage = Message.CreateEmpty(NetworkTags.S_ExcludeFromRoom))
+                {
+                    foreach (var p in players)
+                    {
+                        ClientManager.GetClient(p).SendMessage(playerMessage, SendMode.Reliable);
+                    }
+                }
+            }
         }
 
         void ClientManager_ClientConnected(object sender, ClientConnectedEventArgs e)
