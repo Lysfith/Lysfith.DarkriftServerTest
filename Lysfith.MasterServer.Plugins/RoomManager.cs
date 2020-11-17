@@ -12,7 +12,7 @@ namespace Lysfith.MasterServer.Plugins
     {
         public override bool ThreadSafe => true;
 
-        public override Version Version => new Version(1, 0, 0);
+        public override Version Version => new Version(0, 0, 1);
 
         private Dictionary<ushort, Room> _rooms = new Dictionary<ushort, Room>();
         private List<string> _roomKeys = new List<string>();
@@ -27,6 +27,7 @@ namespace Lysfith.MasterServer.Plugins
         {
             Console.WriteLine($"ClientManager_ClientDisconnected");
 
+            //Check is host
             if (_rooms.ContainsKey(e.Client.ID))
             {
                 var roomToDestroy = _rooms[e.Client.ID];
@@ -52,7 +53,7 @@ namespace Lysfith.MasterServer.Plugins
 
         private void Client_MessageReceived(object sender, MessageReceivedEventArgs e)
         {
-            Console.WriteLine($"MessageReceived: {e.Tag}");
+            //Console.WriteLine($"MessageReceived: {e.Tag}");
             switch (e.Tag)
             {
                 case NetworkTags.C_CreateRoom:

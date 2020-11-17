@@ -1,0 +1,12 @@
+[Trace]   DarkRiftServer        System Details:
+                                	OS: Microsoft Windows NT 10.0.19041.0
+                                	CLS Version: 4.0.30319.42000
+                                	DarkRift: 2.8.1.0 - Pro
+[Trace]   PluginFactory         Created plugin 'RoomManager'.
+[Info]    PluginManager         Installed plugin RoomManager version 1.0.0
+[Trace]   PluginFactory         Created plugin 'BichannelListener'.
+[Trace]   HttpHealthCheck       HTTP health check started at 'http://localhost:4500/health'
+[Trace]   DarkRiftServer        Binding listeners to ClientManager as server is externally visible.
+[Trace]   RemoteServerManager   No server registry connector configured, skipping registration.
+[Trace]   MasterNetworkListener Starting bichannel listener.
+[Info]    MasterNetworkListener Server mounted, listening on port 4300.

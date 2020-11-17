@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="copy /Y &quot;.\bin\Debug\netstandard2.0\*.Models.dll&quot; &quot;..\Libs\DarkRift Server (.NET Framework)\Plugins&quot;&#xD;&#xA;copy /Y &quot;.\bin\Debug\netstandard2.0\*.Plugins.dll&quot; &quot;..\Libs\DarkRift Server (.NET Framework)\Plugins&quot;&#xD;&#xA;copy /Y &quot;.\bin\Debug\netstandard2.0\*.Models.dll&quot; &quot;H:\Unity projects\WitchApprenticeHD\Assets\Scripts\Network&quot;" />
+    <Exec Command="copy /Y &quot;.\bin\Debug\netstandard2.0\*.Models.dll&quot; &quot;..\Libs\DarkRift Server (.NET Core)\Plugins&quot;&#xD;&#xA;copy /Y &quot;.\bin\Debug\netstandard2.0\*.Plugins.dll&quot; &quot;..\Libs\DarkRift Server (.NET Core)\Plugins&quot;&#xD;&#xA;copy /Y &quot;.\bin\Debug\netstandard2.0\*.Models.dll&quot; &quot;H:\Unity projects\WitchApprenticeHD\Assets\Scripts\Network&quot;" />
   </Target>
 
 </Project>
